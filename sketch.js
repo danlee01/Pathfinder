@@ -5,6 +5,7 @@ let cells = [];
 function setup() {
   createCanvas(1000, 1000);
 
+  // Create cells
   for (let x = 0; x < 20; x++) {
     for (let y = 0; y < 20; y++) {
       let posX = x*SQ_LEN;
@@ -12,6 +13,10 @@ function setup() {
       cells.push(new Cell(posX, posY));
     }
   }
+
+  // Determine start, end || UNIT TEST
+  cells[23].start = true;
+  cells[76].end = true;
 }
 
 function draw() {
@@ -23,21 +28,47 @@ function draw() {
   }
 }
 
-function mouseDragged() {
-  //console.log(`x: ${mouseX}, y: ${mouseY}`);
 
+let blocking;
+function mousePressed() {
   for (let cell of cells) {
     if (isInside(cell.getX(), cell.getY(), 50, 50)) {
       if ( cell.blocks ) {
         cell.unblock();
+        blocking = false;
       }
       else {
         cell.block();
+        blocking = true;
+      }
+      cell.pressed = true;
+    }
+  }
+}
+
+function mouseDragged() {
+  for (let cell of cells) {
+    if (!cell.pressed) {
+      if (isInside(cell.getX(), cell.getY(), 50, 50)) {
+        if (cell.blocks && !blocking) {
+          cell.unblock();
+        }
+        if (!cell.blocks && blocking) {
+          cell.block();
+        }
+        cell.pressed = true;
       }
     }
   }
   return false;
 }
+
+function mouseReleased() {
+  for (let cell of cells) {
+    cell.pressed = false;
+  }
+}
+
 
 function isInside(x, y, w, h) {
   if (mouseX > x &&

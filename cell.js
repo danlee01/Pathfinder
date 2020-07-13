@@ -3,6 +3,9 @@ class Cell {
     this.x = x;
     this.y = y;
     this.blocks = false;
+    this.start = false;
+    this.end = false;
+    this.pressed = false;
   }
 
   getX() {
@@ -15,7 +18,13 @@ class Cell {
 
   show(isInside=false) {
     if (isInside) {
-      fill(255, 0, 0);
+      fill(220,220,220);
+    }
+    else if (this.start) {
+      fill(124,252,0);
+    }
+    else if (this.end) {
+      fill(255, 0 , 0);
     }
     else if (this.blocks){
       fill(209,164,251);
@@ -28,7 +37,9 @@ class Cell {
   }
 
   block() {
-    this.blocks = true;
+    if (!this.start && !this.end) {
+      this.blocks = true;
+    }
   }
 
   unblock() {
