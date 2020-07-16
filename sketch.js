@@ -29,11 +29,20 @@ function draw() {
 }
 
 
-let blocking;
+let blocking = false;
+let start = false;
+let end = false;
 function mousePressed() {
   for (let cell of cells) {
     if (isInside(cell.getX(), cell.getY(), 50, 50)) {
-      if ( cell.blocks ) {
+
+      if (cell.start) {
+        start = true;
+      }
+      else if (cell.end) {
+        end = true;
+      }
+      else if ( cell.blocks ) {
         cell.unblock();
         blocking = false;
       }
@@ -41,7 +50,11 @@ function mousePressed() {
         cell.block();
         blocking = true;
       }
-      cell.pressed = true;
+
+      if (!start && !end) {
+        cell.pressed = true;
+      }
+
     }
   }
 }
@@ -50,13 +63,27 @@ function mouseDragged() {
   for (let cell of cells) {
     if (!cell.pressed) {
       if (isInside(cell.getX(), cell.getY(), 50, 50)) {
+        if (start) {
+          resetStart();
+          cell.start = true;
+          cell.unblock();
+        }
+        if (end) {
+          resetEnd();
+          cell.end = true;
+          cell.unblock();
+        }
         if (cell.blocks && !blocking) {
           cell.unblock();
         }
         if (!cell.blocks && blocking) {
           cell.block();
         }
-        cell.pressed = true;
+
+        if (!start && !end) {
+          cell.pressed = true;
+        }
+
       }
     }
   }
@@ -67,6 +94,8 @@ function mouseReleased() {
   for (let cell of cells) {
     cell.pressed = false;
   }
+  start = false;
+  end = false;
 }
 
 
@@ -79,5 +108,17 @@ function isInside(x, y, w, h) {
       }
   else {
     return false;
+  }
+}
+
+function resetStart() {
+  for (let cell of cells) {
+    cell.start = false;
+  }
+}
+
+function resetEnd() {
+  for (let cell of cells) {
+    cell.end = false;
   }
 }

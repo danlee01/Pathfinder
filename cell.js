@@ -17,7 +17,7 @@ class Cell {
   }
 
   show(isInside=false) {
-    if (isInside) {
+    if (isInside && !this.start  && !this.end) {
       fill(220,220,220);
     }
     else if (this.start) {
