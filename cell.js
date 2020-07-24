@@ -45,4 +45,9 @@ class Cell {
   unblock() {
     this.blocks = false;
   }
+
+// perhaps have this function take an array and return an array of neighbors?
+  touches(cell) {
+    return (abs(this.x - cell.x) === 50 || abs(this.y - cell.y)  === 50)
+  }
 }
