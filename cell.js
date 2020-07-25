@@ -58,4 +58,16 @@ class Cell {
   touches(cell) {
     return (abs(this.x - cell.x) === 50 || abs(this.y - cell.y)  === 50)
   }
+
+  getNeighbors() {
+    neighbors = [];
+
+    for (let cell of this.cells) {
+      if (touches(cell)) {
+        neighbors.push(cell);
+      }
+    }
+
+    return neighbors;
+  }
 }

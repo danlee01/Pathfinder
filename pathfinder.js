@@ -22,10 +22,26 @@ class Pathfinder {
     // add necessary data structures
     //  i.e. priority q, q, etc
 
-    this.BFSQueue = new Queue();
   }
 
   function BFS() {
-    
+    parent = {}
+    queue = new Queue();
+
+    queue.enqueue(this.start);
+
+    while(!queue.empty()) {
+      let node = queue.dequeue();
+      if (node == this.end) {
+        // process the path
+      }
+
+      for (let adjacent of node.getNeighbors()) {
+        if (!queue.contains(node)) {
+          parent[adjacent] = node;
+          queue.enqueue(adjacent);
+        }
+      }
+    }
   }
 }

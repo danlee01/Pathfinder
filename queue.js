@@ -7,6 +7,8 @@ class Queue {
     if (this.items.length !== 0) {
       return this.items.pop();
     }
+
+    return null;
   }
 
   enqueue(item) {
@@ -19,5 +21,14 @@ class Queue {
 
   empty() {
     return (this.items.length === 0) ? true : false;
+  }
+
+  contains(element) {
+    for (let item of items) {
+      if (item === element) {
+        return true;
+      }
+    }
+    return false;
   }
 }
