@@ -3,6 +3,7 @@ class Pathfinder {
     // Find and store the start/end cells
     this.start = null;
     this.end = null;
+
     this.cells = cells;
     for (let cell of cells) {
       if (cell.start) {
@@ -19,10 +20,12 @@ class Pathfinder {
 
 
     // add necessary data structures
-    //  i.e. priority q, etc
+    //  i.e. priority q, q, etc
+
+    this.BFSQueue = new Queue();
   }
 
-  function dijkstra() {
-
+  function BFS() {
+    
   }
 }

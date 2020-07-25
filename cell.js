@@ -16,6 +16,14 @@ class Cell {
     return this.y;
   }
 
+  getCenterX() {
+    return this.x + 25;
+  }
+
+  getCenterY() {
+    return this.y + 25;
+  }
+
   show(isInside=false) {
     if (isInside && !this.start  && !this.end) {
       fill(220,220,220);
