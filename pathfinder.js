@@ -43,19 +43,17 @@ class Pathfinder {
 
     while(!queue.empty()) {
       let node = queue.dequeue();
-      //node.blocks = true;
+      node.visited = true;
+      redraw();
       if (node === this.end) {
-        // process the path
-        // TEST
         console.log('omo');
-        //return parent;
         return this.backtrace(parent);
       }
 
-      // FIX: the getNeighbors function need to return cells in a certain order
       for (let adjacent of node.getNeighbors(this.cells)) {
-        if (!adjacent.discovered) {
+        if (!adjacent.discovered && !adjacent.blocks) {
           adjacent.discovered = true;
+          redraw();
           //adjacent.blocks = true;
           parent.set(adjacent, node);
           queue.enqueue(adjacent);

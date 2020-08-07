@@ -10,7 +10,7 @@ class Cell {
     // TEST Pathfinder
     // Will need to add logic in show()
     this.discovered = false;
-    this.parent = null;
+    this.visited = false;
   }
 
   getX() {
@@ -38,6 +38,14 @@ class Cell {
     }
     else if (this.end) {
       fill(255, 0 , 0);
+    }
+    else if (this.visited) {
+      fill(140,180,210);
+      // dark blue?
+    }
+    else if (this.discovered) {
+      fill(162,214,236);
+      // some lighter variation of visited
     }
     else if (this.blocks){
       fill(209,164,251);
@@ -121,7 +129,9 @@ class Cell {
       if (neighbor.x === rightX && neighbor.y === botY) botRight = neighbor;
     }
 
-    let existance = [right, topRight, top, topLeft, left, botLeft, bot, botRight];
+    //let existance = [right, topRight, top, topLeft, left, botLeft, bot, botRight];
+    let existance = [right,  top,  left,  bot];
+
     existance.forEach(element => {
       if (element) orderedNeighbors.push(element);
     })
