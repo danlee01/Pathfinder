@@ -24,21 +24,40 @@ class Pathfinder {
 
   }
 
-  function BFS() {
-    parent = {}
-    queue = new Queue();
+  backtrace(parent) {
+    let path = [this.end];
+    while (path[path.length-1] !== this.start) {
+      path.push(parent.get(path[path.length-1]))
+      console.log(path);
+    }
+    return path;
+  }
 
+  BFS() {
+    let parent = new Map();
+    let queue = new Queue();
+
+
+    this.start.discovered = true;
     queue.enqueue(this.start);
 
     while(!queue.empty()) {
       let node = queue.dequeue();
-      if (node == this.end) {
+      //node.blocks = true;
+      if (node === this.end) {
         // process the path
+        // TEST
+        console.log('omo');
+        //return parent;
+        return this.backtrace(parent);
       }
 
-      for (let adjacent of node.getNeighbors()) {
-        if (!queue.contains(node)) {
-          parent[adjacent] = node;
+      // FIX: the getNeighbors function need to return cells in a certain order
+      for (let adjacent of node.getNeighbors(this.cells)) {
+        if (!adjacent.discovered) {
+          adjacent.discovered = true;
+          //adjacent.blocks = true;
+          parent.set(adjacent, node);
           queue.enqueue(adjacent);
         }
       }

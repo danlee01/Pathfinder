@@ -1,6 +1,7 @@
 const SQ_COUNT = 20;
 const SQ_LEN = 50;
 let cells = [];
+let pathCells;
 
 function setup() {
   createCanvas(1000, 1000);
@@ -17,7 +18,14 @@ function setup() {
   // Determine start, end || UNIT TEST
   cells[23].start = true;
   cells[76].end = true;
+
+  // TEST PATH CLASS
+  pathCells = cells.slice(0,2);
+  pathCells.push(cells[20]);
+  pathCells.push(cells[21]);
 }
+
+
 
 function draw() {
   background(0);
@@ -26,6 +34,10 @@ function draw() {
   for (let cell of cells) {
     cell.show(isInside(cell.getX(), cell.getY(), 50, 50));
   }
+
+  // Draw the path
+  let path = new Path(pathCells);
+  path.show();
 }
 
 

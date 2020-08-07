@@ -24,7 +24,7 @@ class Queue {
   }
 
   contains(element) {
-    for (let item of items) {
+    for (let item of this.items) {
       if (item === element) {
         return true;
       }
