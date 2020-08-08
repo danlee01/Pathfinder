@@ -1,10 +1,13 @@
 const SQ_COUNT = 20;
 const SQ_LEN = 50;
 let cells = [];
-let pathCells;
+//let pathCells;
+
+let button;
+let find;
 
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(2000, 1000);
 
   // Create cells
   for (let x = 0; x < 20; x++) {
@@ -17,7 +20,13 @@ function setup() {
 
   // Determine start, end || UNIT TEST
   cells[23].start = true;
-  cells[76].end = true;
+  cells[46].end = true;
+
+
+  // Create button
+  button = createButton('Search');
+  button.position(1500, 500);
+  button.mousePressed(startSearch);
 
   // TEST PATH CLASS
   pathCells = cells.slice(0,2);
@@ -31,13 +40,17 @@ function draw() {
   background(0);
   fill(200);
 
+
   for (let cell of cells) {
     cell.show(isInside(cell.getX(), cell.getY(), 50, 50));
   }
 
   // Draw the path
-  let path = new Path(pathCells);
-  path.show();
+  if (find) {
+    let path = new Path(find.path);
+    path.show();
+  }
+
 }
 
 
@@ -121,6 +134,18 @@ function isInside(x, y, w, h) {
   else {
     return false;
   }
+}
+
+function resetCells() {
+  cells.forEach( element => {element.reset();} );
+}
+
+
+function startSearch() {
+  resetCells(cells);
+  console.log('click!');
+  find = new Pathfinder(cells);
+  let path = find.BFS();
 }
 
 function resetStart() {

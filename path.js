@@ -21,5 +21,13 @@ class Path {
     pop();
   }
 
+  reset() {
+    this.cells = [];
+  }
+
+  update(cells) {
+    this.cells = [];
+  }
+
   // Add a append function to path class??
 }

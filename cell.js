@@ -29,6 +29,11 @@ class Cell {
     return this.y + 25;
   }
 
+  reset() {
+    this.discovered = false;
+    this.visited = false;
+  }
+
   show(isInside=false) {
     if (isInside && !this.start  && !this.end) {
       fill(220,220,220);
