@@ -40,9 +40,7 @@ class Cell {
     }
     else if (this.start) {
       //fill(124,252,0);
-      fill(214,242,210)
-
-;
+      fill(214,242,210);
     }
     else if (this.end) {
       //fill(255, 0 , 0);
