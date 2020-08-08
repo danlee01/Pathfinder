@@ -39,10 +39,14 @@ class Cell {
       fill(220,220,220);
     }
     else if (this.start) {
-      fill(124,252,0);
+      //fill(124,252,0);
+      fill(214,242,210)
+
+;
     }
     else if (this.end) {
-      fill(255, 0 , 0);
+      //fill(255, 0 , 0);
+      fill(242,210,230);
     }
     else if (this.visited) {
       fill(140,180,210);

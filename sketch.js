@@ -5,6 +5,7 @@ let cells = [];
 
 let button;
 let find;
+let searching = false;
 
 function setup() {
   createCanvas(2000, 1000);
@@ -47,8 +48,13 @@ function draw() {
 
   // Draw the path
   if (find) {
+    console.log('here');
     let path = new Path(find.path);
     path.show();
+
+    if (path.cells.length !== 0) {
+      searching = false;
+    }
   }
 
 }
@@ -88,12 +94,12 @@ function mouseDragged() {
   for (let cell of cells) {
     if (!cell.pressed) {
       if (isInside(cell.getX(), cell.getY(), 50, 50)) {
-        if (start) {
+        if (start && !searching) {
           resetStart();
           cell.start = true;
           cell.unblock();
         }
-        if (end) {
+        if (end && !searching) {
           resetEnd();
           cell.end = true;
           cell.unblock();
@@ -142,10 +148,14 @@ function resetCells() {
 
 
 function startSearch() {
-  resetCells(cells);
-  console.log('click!');
-  find = new Pathfinder(cells);
-  let path = find.BFS();
+  if (!searching) {
+    searching = true;
+    resetCells(cells);
+    console.log('click!');
+    find = new Pathfinder(cells);
+    let path = find.BFS();
+  }
+
 }
 
 function resetStart() {
