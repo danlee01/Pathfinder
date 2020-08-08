@@ -18,10 +18,7 @@ class Pathfinder {
       throw "nonexistant start/end";
     }
 
-
-    // add necessary data structures
-    //  i.e. priority q, q, etc
-
+    this.path = [];
   }
 
   backtrace(parent) {
@@ -33,7 +30,7 @@ class Pathfinder {
     return path;
   }
 
-  BFS() {
+  async BFS() {
     let parent = new Map();
     let queue = new Queue();
 
@@ -41,19 +38,23 @@ class Pathfinder {
     this.start.discovered = true;
     queue.enqueue(this.start);
 
+
     while(!queue.empty()) {
       let node = queue.dequeue();
       node.visited = true;
-      redraw();
+
+      // Wait for 100 ms between each node
+      await new Promise(r => setTimeout(r, 100));
+
       if (node === this.end) {
         console.log('omo');
-        return this.backtrace(parent);
+        this.path = this.backtrace(parent);
+        return;
       }
 
       for (let adjacent of node.getNeighbors(this.cells)) {
         if (!adjacent.discovered && !adjacent.blocks) {
           adjacent.discovered = true;
-          redraw();
           //adjacent.blocks = true;
           parent.set(adjacent, node);
           queue.enqueue(adjacent);

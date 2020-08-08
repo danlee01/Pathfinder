@@ -8,7 +8,8 @@ class Path {
     if (this.cells.length < 2) {
       return;
     }
-
+    push();
+    strokeWeight(4);
     for (let i = 0; i < this.cells.length - 1; i++) {
       line(
         this.cells[i].getCenterX(),
@@ -17,6 +18,7 @@ class Path {
         this.cells[i+1].getCenterY()
       )
     }
+    pop();
   }
 
   // Add a append function to path class??
