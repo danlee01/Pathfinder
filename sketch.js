@@ -27,7 +27,7 @@ function setup() {
 
   // Create button
   button = createButton('Search');
-  button.position(2*displayWidth/3, displayWidth/5);
+  button.position(30*floor(displayWidth/50), 10*floor(displayWidth/50));
   button.mousePressed(startSearch);
 
   // TEST PATH CLASS
