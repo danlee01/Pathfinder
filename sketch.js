@@ -50,7 +50,6 @@ function draw() {
 
   // Draw the path
   if (find) {
-    console.log('here');
     let path = new Path(find.path);
     path.show();
 

@@ -25,7 +25,6 @@ class Pathfinder {
     let path = [this.end];
     while (path[path.length-1] !== this.start) {
       path.push(parent.get(path[path.length-1]))
-      console.log(path);
     }
     return path;
   }
@@ -47,7 +46,6 @@ class Pathfinder {
       await new Promise(r => setTimeout(r, 100));
 
       if (node === this.end) {
-        console.log('omo');
         this.path = this.backtrace(parent);
         return;
       }
