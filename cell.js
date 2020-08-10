@@ -102,7 +102,6 @@ class Cell {
     for (let cell of cells) {
       if (this.touches(cell)) {
         neighbors.push(cell);
-            console.log(Math.sqrt((this.x-cell.x)*(this.x-cell.x)+(this.y-cell.y)*(this.y-cell.y))+" " +floor(displayWidth/50));
       }
     }
 
