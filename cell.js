@@ -22,11 +22,11 @@ class Cell {
   }
 
   getCenterX() {
-    return this.x + 25;
+    return this.x + floor(displayWidth/50)/2;//25;
   }
 
   getCenterY() {
-    return this.y + 25;
+    return this.y + floor(displayWidth/50)/2;//25;
   }
 
   reset() {
@@ -61,7 +61,8 @@ class Cell {
       fill(255);
     }
 
-    rect(this.x, this.y, 50, 50);
+    //rect(this.x, this.y, 50, 50);
+    rect(this.x, this.y, floor(displayWidth/50), floor(displayWidth/50));
   }
 
   block() {
@@ -76,13 +77,13 @@ class Cell {
 
   touches(cell) {
     // return (abs(this.x - cell.x) === 50 || abs(this.y - cell.y)  === 50)
-    let distance = dist(this.x, this.y, cell.x, cell.y);
+    let distance = floor(Math.sqrt((this.x-cell.x)*(this.x-cell.x)+(this.y-cell.y)*(this.y-cell.y)))//dist(this.x, this.y, cell.x, cell.y);
 
     // Calculate coordinates of diagonal cells
-    let rightX = this.x + 50;
-    let topY = this.y - 50;
-    let leftX = this.x - 50;
-    let botY = this.y + 50;
+    let rightX = this.x + displayWidth/50;// 50;
+    let topY = this.y - displayWidth/50;//50;
+    let leftX = this.x - displayWidth/50;//50;
+    let botY = this.y + displayWidth/50;//50;
 
     // Check if cell is a diagonal
     let topRight = (cell.x === rightX && cell.y === topY);
@@ -90,7 +91,8 @@ class Cell {
     let botRight = (cell.x === rightX && cell.y === botY);
     let botLeft = (cell.x === leftX && cell.y === botY);
 
-    return (distance === 50 || topRight || topLeft || botRight || botLeft);
+    //return (distance === 50 || topRight || topLeft || botRight || botLeft);
+    return (distance ===  floor(displayWidth/50) || topRight || topLeft || botRight || botLeft);
   }
 
   getNeighbors(cells) {
@@ -100,16 +102,17 @@ class Cell {
     for (let cell of cells) {
       if (this.touches(cell)) {
         neighbors.push(cell);
+            console.log(Math.sqrt((this.x-cell.x)*(this.x-cell.x)+(this.y-cell.y)*(this.y-cell.y))+" " +floor(displayWidth/50));
       }
     }
 
     // Sort neighbors so we get the following arrangement
     // [right, topRight, top, topLeft, left, botleft, bot, botRight]
     // The following will be ugly and hardcoded =(
-    let rightX = this.x + 50;
-    let topY = this.y - 50;
-    let leftX = this.x - 50;
-    let botY = this.y + 50;
+    let rightX = this.x +  floor(displayWidth/50);//50;
+    let topY = this.y -  floor(displayWidth/50);//50;
+    let leftX = this.x -  floor(displayWidth/50);//50;
+    let botY = this.y +  floor(displayWidth/50);//50;
 
 
     /*

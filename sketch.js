@@ -1,5 +1,5 @@
 const SQ_COUNT = 20;
-const SQ_LEN = 50;
+//const SQ_LEN = 50;
 let cells = [];
 //let pathCells;
 
@@ -8,9 +8,10 @@ let find;
 let searching = false;
 
 function setup() {
-  createCanvas(2000, 1000);
-
-  // Create cells
+  //createCanvas(2000, 1000);
+  createCanvas(displayWidth, displayHeight);
+  // Create cells.
+  const SQ_LEN = floor(displayWidth/50);
   for (let x = 0; x < 20; x++) {
     for (let y = 0; y < 20; y++) {
       let posX = x*SQ_LEN;
@@ -26,7 +27,7 @@ function setup() {
 
   // Create button
   button = createButton('Search');
-  button.position(1500, 500);
+  button.position(2*displayWidth/3, displayHeight/2);
   button.mousePressed(startSearch);
 
   // TEST PATH CLASS
@@ -43,7 +44,8 @@ function draw() {
 
 
   for (let cell of cells) {
-    cell.show(isInside(cell.getX(), cell.getY(), 50, 50));
+    //cell.show(isInside(cell.getX(), cell.getY(), 50, 50));
+    cell.show(isInside(cell.getX(), cell.getY(), floor(displayWidth/50), floor(displayWidth/50)));
   }
 
   // Draw the path
@@ -65,8 +67,8 @@ let start = false;
 let end = false;
 function mousePressed() {
   for (let cell of cells) {
-    if (isInside(cell.getX(), cell.getY(), 50, 50)) {
-
+    //if (isInside(cell.getX(), cell.getY(), 50, 50)) {
+    if (isInside(cell.getX(), cell.getY(), floor(displayWidth/50), floor(displayWidth/50))) {
       if (cell.start) {
         start = true;
       }
@@ -93,7 +95,8 @@ function mousePressed() {
 function mouseDragged() {
   for (let cell of cells) {
     if (!cell.pressed) {
-      if (isInside(cell.getX(), cell.getY(), 50, 50)) {
+      // if (isInside(cell.getX(), cell.getY(), 50, 50)) {
+      if (isInside(cell.getX(), cell.getY(), floor(displayWidth/50), floor(displayWidth/50))) {
         if (start && !searching) {
           resetStart();
           cell.start = true;
@@ -151,7 +154,7 @@ function startSearch() {
   if (!searching) {
     searching = true;
     resetCells(cells);
-    console.log('click!');
+    console.log(displayWidth);
     find = new Pathfinder(cells);
     let path = find.BFS();
   }
