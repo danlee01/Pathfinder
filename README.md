@@ -1,5 +1,5 @@
 # Pathfinder
-[Visualizes](danxlee.me/Pathfinder) pathfinding algorithms.
+[Visualizes](http://danxlee.me/Pathfinder) pathfinding algorithms.
 
 ## Current Features
 1. Breadth First Search
