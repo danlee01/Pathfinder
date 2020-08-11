@@ -1,7 +1,11 @@
 # Pathfinder
-Visualizes pathfinding algorithms. 
+[Visualizes](danxlee.me/Pathfinder) pathfinding algorithms.
 
-## Current planned features
+## Current Features
+1. Breadth First Search
+
+## Planned features
 1. Dijkstra's algorithm
 2. A* algorithm
-3. Breadth First Search
+3. Diagonal movement
+
