@@ -1,7 +1,7 @@
 const SQ_COUNT = 20;
 //const SQ_LEN = 50;
 let cells = [];
-//let pathCells;
+let pathCells;
 
 let button;
 let find;
