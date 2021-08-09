@@ -1,5 +1,5 @@
 # Pathfinder
-[Visualizes](http://danxlee.me/Pathfinder) pathfinding algorithms.
+[Visualizes](https://github.com/danlee01/Pathfinder) pathfinding algorithms.
 
 Green- start
 Pink- end
